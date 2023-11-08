@@ -51,18 +51,18 @@ def ex_2():
     def sinusoidal_signal(f, n):
         return np.sin(2 * np.pi * f * n)
 
-    f = 12
-    fs = 6
-    n = np.linspace(0, 1, 100)
-    t = np.linspace(0, 1, fs)
+    f0 = 7
+    fs = 6  # fs < 2 * f
+    n = np.linspace(0, 1, 1000)
+    t = np.linspace(0, 1, fs + 1)
 
     fig, axs = plt.subplots(4)
     axs[0].plot(n, sinusoidal_signal(12, n))
     axs[0].set_xlim([0, 1])
 
-    for i, fi in enumerate([12, 7, 2]):
-        axs[i + 1].plot(n, sinusoidal_signal(fi, n))
-        axs[i + 1].scatter(t, sinusoidal_signal(fi, t), c="red")
+    f_list = [f0 + k * fs for k in [1, 0, -1]]
+    for i, f in enumerate(f_list):
+        axs[i + 1].plot(n, sinusoidal_signal(f, n))
         axs[i + 1].scatter(t, sinusoidal_signal(f, t), c="orange")
         axs[i + 1].set_xlim([0, 1])
 
@@ -77,19 +77,19 @@ def ex_3():
     def sinusoidal_signal(f, n):
         return np.sin(2 * np.pi * f * n)
 
-    f = 12
-    fs = 15
-    n = np.linspace(0, 1, 100)
+    f0 = 7
+    fs = 15  # fs > 2 * f
+    n = np.linspace(0, 1, 1000)
     t = np.linspace(0, 1, fs)
 
     fig, axs = plt.subplots(4)
     axs[0].plot(n, sinusoidal_signal(12, n))
     axs[0].set_xlim([0, 1])
 
-    for i, fi in enumerate([12, 7, 2]):
+    f_list = [f0 + k * fs for k in [1, 0, -1]]
+    for i, fi in enumerate(f_list):
         axs[i + 1].plot(n, sinusoidal_signal(fi, n))
-        axs[i + 1].scatter(t, sinusoidal_signal(fi, t), c="red")
-        axs[i + 1].scatter(t, sinusoidal_signal(f, t), c="orange")
+        axs[i + 1].scatter(t, sinusoidal_signal(fi, t), c="orange")
         axs[i + 1].set_xlim([0, 1])
 
     plt.tight_layout()
@@ -157,9 +157,9 @@ def ex_7():
 
 if __name__ == '__main__':
     # ex_1()
-    # ex_2()
-    # ex_3()
-    # ex_4()
-    # ex_5()
-    # ex_6()
+    ex_2()
+    ex_3()
+    ex_4()
+    ex_5()
+    ex_6()
     ex_7()
