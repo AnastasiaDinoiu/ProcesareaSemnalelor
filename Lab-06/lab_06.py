@@ -133,7 +133,7 @@ def ex_4():
     ts = (x.Datetime[1] - x.Datetime[0]).total_seconds()  # perioada de esantionare
     fs = 1 / ts  # frecventa de esantionare: 1 / 3600 Hz
     f_nyquist = fs / 2  # frecventa Nyquist: 1 / 7200 Hz
-    wn = 0.0001  # frecventa de taiere (Hz) este mai mica decat frecventa Nyquist (~0.0001388 Hz)
+    wn = fs / 4  # frecventa de taiere (Hz) este mai mica decat frecventa Nyquist (~0.0001388 Hz)
     wn_normalized = wn / f_nyquist  # frecventa normalizata
 
     # d --------------------------------------------------
