@@ -1,10 +1,8 @@
-from scipy import misc, ndimage
+from scipy import misc
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy.io import wavfile
-from scipy.signal import butter, sosfreqz, sosfilt
 from scipy.ndimage import gaussian_filter
-from skimage.restoration import denoise_bilateral
 
 
 def ex_1():
@@ -156,13 +154,15 @@ def ex_3():
 
 
 def ex_4():
-    def plot_spectogram(signal, fs, title):
+    def plot_spectogram(signal, fs, title, index):
         plt.specgram(signal, Fs=fs)
         plt.title(title)
         plt.xlabel("Timp (secunde)")
         plt.ylabel("Frecventa (Hz)")
         plt.xticks(np.arange(0, 5.5, 0.5))
         plt.colorbar()
+        plt.savefig(f"Ex-4/Figura_{index}.png")
+        plt.savefig(f"Ex-4/Figura_{index}.pdf")
         plt.show()
 
     fs1, signal = wavfile.read("audio.wav")
@@ -171,12 +171,12 @@ def ex_4():
     fs2, instrument = wavfile.read("drums.wav")
     instrument = instrument[fs2 * 25:fs2 * 30]
 
-    plot_spectogram(signal, fs1, "Spectrograma semnalului audio")
-    plot_spectogram(instrument, fs2, "Spectrograma instrumentului audio")
+    plot_spectogram(signal, fs1, "Spectrograma semnalului audio", 9)
+    plot_spectogram(instrument, fs2, "Spectrograma instrumentului audio", 10)
 
 
 if __name__ == '__main__':
     # ex_1()
     # ex_2()
-    ex_3()
-    # ex_4()
+    # ex_3()
+    ex_4()
