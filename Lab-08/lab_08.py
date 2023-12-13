@@ -1,6 +1,8 @@
 import numpy as np
 import scipy as sp
 from matplotlib import pyplot as plt
+from skimage.metrics import mean_squared_error
+from statsmodels.tsa.ar_model import AutoReg
 
 
 def ex_1():
@@ -40,6 +42,40 @@ def ex_1():
     plt.savefig("Ex-1/Figura_2.pdf")
     plt.show()
     plt.close()
+
+    # ----------------- c -----------------
+    p = 150
+    train_size = 800
+
+    train_series = time_series[:train_size]
+
+    model = AutoReg(train_series, lags=p)
+    predictions = model.fit().predict(start=train_size, end=n - 1)
+
+    plt.figure(figsize=(10, 5))
+    plt.plot(t, time_series, label="Seria de timp")
+    plt.plot(t[train_size:], predictions, label="Predictii AR")
+    plt.title("Modelul AR")
+    plt.legend()
+    plt.grid()
+    plt.savefig("Ex-1/Figura_3.png")
+    plt.savefig("Ex-1/Figura_3.pdf")
+    plt.show()
+    plt.close()
+
+    # ----------------- d -----------------
+    best_p, best_m, max = None, None, np.inf
+
+    for p in range(1, 50):
+        for m in range(1, 10):
+            model = AutoReg(train_series, lags=p)
+            predictions = model.fit().predict(start=train_size, end=train_size + m - 1)
+
+            mse = mean_squared_error(time_series[train_size:train_size + m], predictions)
+            if mse < max:
+                best_p, best_m, max = p, m, mse
+
+    print(f"Parametrii p:{best_p} si m:{best_m}")
 
 
 if __name__ == '__main__':

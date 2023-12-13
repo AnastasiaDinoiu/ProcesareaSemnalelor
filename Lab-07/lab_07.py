@@ -160,19 +160,20 @@ def ex_4():
         plt.xlabel("Timp (secunde)")
         plt.ylabel("Frecventa (Hz)")
         plt.xticks(np.arange(0, 5.5, 0.5))
+        plt.ylim(top=20000)
         plt.colorbar()
         plt.savefig(f"Ex-4/Figura_{index}.png")
         plt.savefig(f"Ex-4/Figura_{index}.pdf")
         plt.show()
 
-    fs1, signal = wavfile.read("audio.wav")
-    signal = signal[fs1 * 25:fs1 * 30]
+    fs, signal = wavfile.read("audio.wav")
+    signal = signal[fs * 25:fs * 30]
 
-    fs2, instrument = wavfile.read("drums.wav")
-    instrument = instrument[fs2 * 25:fs2 * 30]
+    _, instrument = wavfile.read("drums.wav")
+    instrument = instrument[fs * 25:fs * 30]
 
-    plot_spectogram(signal, fs1, "Spectrograma semnalului audio", 9)
-    plot_spectogram(instrument, fs2, "Spectrograma instrumentului audio", 10)
+    plot_spectogram(signal, fs, "Spectrograma semnalului audio", 9)
+    plot_spectogram(instrument, fs, "Spectrograma instrumentului audio", 10)
 
 
 if __name__ == '__main__':
