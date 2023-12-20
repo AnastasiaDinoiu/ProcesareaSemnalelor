@@ -55,7 +55,7 @@ def ex_2(time_series):
         t,
         ["Seria de timp", f"Mediere exponentiala (random_alpha={random_alpha})",
          f"Mediere exponentiala (best_alpha={round(best_alpha, 2)})"],
-        "Ex-1/Figura_1")
+        "Ex-2/Figura_1")
 
 
 def ex_3(time_series):
